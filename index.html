@@ -17,13 +17,12 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: #000; /* fondo inicial negro */
-      transition: background 0.3s ease;
+      background: #000; /* Fondo negro fijo */
     }
 
     .container {
       display: flex;
-      border: 1px solid #333;
+      border: none;
       color: white;
       font-size: 3em;
       font-weight: bold;
@@ -36,26 +35,16 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: #02030d;
+      background: #02030d; /* Color oscuro similar a tu imagen */
     }
 
     .block:nth-child(2) {
-      background: #000;
+      background: #000; /* Día en fondo más negro */
     }
 
     .label {
       font-size: 0.4em;
       margin-top: 10px;
-    }
-
-    .color-picker {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: white;
-      padding: 8px;
-      border-radius: 8px;
-      font-size: 0.8em;
     }
   </style>
 </head>
@@ -69,11 +58,6 @@
       <div id="day">----</div>
       <div class="label">DAY</div>
     </div>
-  </div>
-
-  <div class="color-picker">
-    <label for="bgColor">Background:</label>
-    <input type="color" id="bgColor" value="#000000">
   </div>
 
   <script>
@@ -94,12 +78,6 @@
 
     setInterval(updateClock, 1000);
     updateClock();
-
-    // Color picker logic
-    const bgColorInput = document.getElementById('bgColor');
-    bgColorInput.addEventListener('input', function () {
-      document.body.style.background = this.value;
-    });
   </script>
 </body>
 </html>

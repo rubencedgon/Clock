@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clock Widget</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #000; /* fondo inicial negro */
+      transition: background 0.3s ease;
+    }
+
+    .container {
+      display: flex;
+      border: 1px solid #333;
+      color: white;
+      font-size: 3em;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .block {
+      padding: 40px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #02030d;
+    }
+
+    .block:nth-child(2) {
+      background: #000;
+    }
+
+    .label {
+      font-size: 0.4em;
+      margin-top: 10px;
+    }
+
+    .color-picker {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="block" id="time-block">
+      <div id="time">--:--</div>
+      <div class="label" id="ampm">--</div>
+    </div>
+    <div class="block" id="day-block">
+      <div id="day">----</div>
+      <div class="label">DAY</div>
+    </div>
+  </div>
+
+  <div class="color-picker">
+    <label for="bgColor">Background:</label>
+    <input type="color" id="bgColor" value="#000000">
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12;
+
+      const dayNames = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+      const day = dayNames[now.getDay()];
+
+      document.getElementById('time').textContent = `${String(hours).padStart(2, '0')}:${minutes}`;
+      document.getElementById('ampm').textContent = ampm;
+      document.getElementById('day').textContent = day;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Color picker logic
+    const bgColorInput = document.getElementById('bgColor');
+    bgColorInput.addEventListener('input', function () {
+      document.body.style.background = this.value;
+    });
+  </script>
+</body>
+</html>
